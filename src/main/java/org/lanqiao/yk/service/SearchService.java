@@ -11,4 +11,10 @@ public interface SearchService {
     public List<VideoInfo> searchVideo(String keyword);
 //    查询分类
 public List<VideoInfo> searchCategory(String category);
+
+    public List<VideoInfo> searchCategoryDESC(String category);
+
+    public List<VideoInfo> searchVideoHot(String keyword);
+
+    public List<VideoInfo> searchCategoryHot(String category);
 }
