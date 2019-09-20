@@ -38,7 +38,7 @@
     SELECT count(*) FROM dynamic_info where user_id = #{param};
   </select>
   <select id="getAllDynamic" resultMap="BaseResultMap">
-   SELECT d.*,u.user_name,u.face_pic FROM user_info u,dynamic_info d where u.user_id=d.user_id;
+   SELECT d.*,u.user_name,u.face_pic FROM user_info u,dynamic_info d where u.user_id=d.user_id order by dynamic_time desc;
   </select>
   <select id="getAllDynamicByPage" resultMap="BaseResultMap" parameterType="java.lang.Integer">
    SELECT d.*,u.user_name,u.face_pic FROM user_info u,dynamic_info d where u.user_id=d.user_id limit #{param1},#{param2};

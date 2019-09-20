@@ -1,5 +1,8 @@
 package org.lanqiao.yk.entity;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class VideoPicMov {
     private Integer picMovId;
 

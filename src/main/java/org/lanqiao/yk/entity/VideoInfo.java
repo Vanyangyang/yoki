@@ -2,10 +2,10 @@ package org.lanqiao.yk.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
-import org.springframework.data.solr.core.mapping.SolrDocument;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
-
+@Repository
 public class VideoInfo {
     @Id
     @Indexed
