@@ -21,8 +21,18 @@
                 type: "post",
                 dataType: "json",
                 success: function (data) {
+                    console.log(uId)
                     console.log(data);
-                    $("#icon_avatar img").attr("src",data[0].facePic);
+                    if (data[0].facePic==""){
+                        $("#icon_avatar img").attr("src", "image/用户头像未登录80-80.png");
+                    }else {
+                        $("#icon_avatar img").attr("src", data[0].facePic);
+                    }
+                    if (data[0].facePic==""){
+                        $("#photo").attr("src", "image/用户头像未登录80-80.png");
+                    }else {
+                        $("#photo").attr("src", data[0].facePic);
+                    }
                     list = data;
                     $("#nicheng").attr('value', data[0].userName);
                     if ($("#information input[value='男']").attr('value') == data[0].sex) {

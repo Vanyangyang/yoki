@@ -78,8 +78,16 @@
                 dataType:"json",
                 success:function (data) {
                     console.log(data);
-                    $("#face").attr("src",data.facePic);
-                    $("#icon_avatar img").attr("src",data.facePic);
+                    if (data.facePic==""){
+                        $("#face").attr("src", "image/用户头像未登录80-80.png");
+                    }else {
+                        $("#face").attr("src", data.facePic);
+                    }
+                    if (data.facePic==""){
+                        $("#icon_avatar img").attr("src", "image/用户头像未登录80-80.png");
+                    }else {
+                        $("#icon_avatar img").attr("src", data.facePic);
+                    }
                 }
             })
 

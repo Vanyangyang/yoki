@@ -35,7 +35,7 @@
   </update>
 <!--获得所有评论-->
   <select id="getAllComment" resultMap="VideoCommentResultMap">
-  select u.user_id,comment_id,user_name,face_pic,comment_content,`comment_ time`,like_number,dislike_number from user_info u,video_comment v where video_id=#{videoId} and u.user_id=v.user_id order by `comment_ time` desc
+  select u.user_id,comment_id,user_name,face_pic,comment_content,`comment_ time`,like_number,dislike_number from user_info u,video_comment v where video_id=#{param1} and u.user_id=v.user_id order by `comment_ time` desc
   </select>
 
   <sql id="Base_Column_List" >

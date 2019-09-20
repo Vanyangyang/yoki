@@ -651,7 +651,11 @@
             dataType:"json",
             success:function (data) {
                 console.log(data)
-                $("#facPic").attr("src", data.facePic);
+                if (data.facePic==""){
+                    $("#facPic").attr("src", "image/用户头像未登录80-80.png");
+                }else {
+                    $("#facPic").attr("src", data.facePic);
+                }
             }
             })
     });

@@ -178,9 +178,18 @@
                     'userId': uid
                 },
                 success: function (data){
+                    console.log(111111111111)
                     console.log(data);
-                    $("#head_pic img").attr("src",data);
-                    $("#icon_avatar img").attr("src",data);
+                    if (data==""){
+                        $("#head_pic img").attr("src", "image/用户头像未登录80-80.png");
+                    }else {
+                        $("#head_pic img").attr("src", data.facePic);
+                    }
+                    if (data==""){
+                        $("#icon_avatar img").attr("src", "image/用户头像未登录80-80.png");
+                    }else {
+                        $("#icon_avatar img").attr("src", data.facePic);
+                    }
                 }
             })
 
