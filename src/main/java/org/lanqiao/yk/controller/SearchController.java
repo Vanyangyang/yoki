@@ -22,8 +22,25 @@ public class SearchController {
     public List<VideoInfo> searchDESC(String keyword){
         return  searchService.searchVideo(keyword);
     }
+//  类型排序
     @RequestMapping("/searchCategory")
     public List<VideoInfo> searchCategory(String category){
         return  searchService.searchCategory(category);
+    }
+
+    @RequestMapping("/searchCategoryDESC")
+    public List<VideoInfo> searchCategoryDESC(String category){
+        return  searchService.searchCategoryDESC(category);
+    }
+
+//    最热
+    @RequestMapping("/searchHot")
+    public List<VideoInfo> searchVideoHot(String keyword){
+        return  searchService.searchVideoHot(keyword);
+    }
+
+    @RequestMapping("/searchCategoryHot")
+    public List<VideoInfo> searchCategoryHot(String category){
+        return  searchService.searchCategoryHot(category);
     }
 }
