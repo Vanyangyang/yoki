@@ -9,10 +9,28 @@
     <result column="dislike_number" property="dislikeNumber" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="comment_id" property="commentId" jdbcType="INTEGER" />
+    <association property="userInfo" resultMap="UserInfoMap"/>
   </resultMap>
-
+  <resultMap id="UserInfoMap" type="org.lanqiao.yk.entity.UserInfo" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_intro" property="userIntro" jdbcType="VARCHAR" />
+    <result column="face_pic" property="facePic" jdbcType="VARCHAR" />
+    <result column="user_url" property="userUrl" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="day" property="day" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="telephone" property="telephone" jdbcType="DECIMAL" />
+    <result column="cNum" property="cNum" jdbcType="INTEGER"/>
+  </resultMap>
   <select id="getAllViReply" resultMap="ViReplyResultMap">
-    select * from video_comment_reply where user_id=#{userId} and comment_id=#{commentId}
+    select * from video_comment_reply vc,user_info u where comment_id=#{commentId} and vc.user_id=u.user_id
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

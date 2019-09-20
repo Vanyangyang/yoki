@@ -106,7 +106,8 @@
                         },
                         dataType:"json",
                         success:function (data) {
-                            console.log(jj)
+                            console.log(data);
+                            console.log(comments[jj]);
                             countReply=data.length;
                             var date=comments[jj].commentTime;
                             var $comment=$("<div class=\"comment\">\n" +
@@ -168,16 +169,16 @@
                 url:"http://localhost:8080/getAllViReply",
                 type:"post",
                 data:{
-                    userId:uId,
-                    commentId:cId,
+                    commentId:cId
                 },
                 dataType:"json",
                 success:function (data) {
+                    console.log(data);
                     countReply=data.length;
                     for(var i=0;i<data.length;i++){
                         var date=data[i].replyTime;
                         $inComment=$("<div class=\"inComment\">\n" +
-                            "                    <img src=\"image/头像demo.png\" style=\"width: 32px;height: 32px;border-radius: 100%;margin-left: 15px;padding-top: 10px\"><span class=\"f14 ff3300\" style=\"margin-left: 5px;position: relative;top:-5px\">我</span><span class=\"f14\" style=\"margin-left: 5px;position: relative;top:-5px\">"+data[i].replyContent+"</span><br><span style=\"margin-left: 18px;margin-top: 5px\">"+getAccurateTime(date)+"</span>\n" +
+                            "                    <img src=\""+data[i].userInfo.facePic+"\" style=\"width: 32px;height: 32px;border-radius: 100%;margin-left: 15px;padding-top: 10px\"><span class=\"f14 ff3300\" style=\"margin-left: 5px;position: relative;top:-5px\">"+data[i].userInfo.userName+"</span><span class=\"f14\" style=\"margin-left: 5px;position: relative;top:-5px\">"+data[i].replyContent+"</span><br><span style=\"margin-left: 18px;margin-top: 5px\">"+getAccurateTime(date)+"</span>\n" +
                             "                </div>");
                         $("#blank").after($inComment);
                     }
@@ -193,6 +194,7 @@
                 },
                 dataType:"json",
                 success:function (data) {
+                    console.log(data)
                     comments=[];
                     for (var i=0;i<data.length;i++){
                         comments.push(data[i]);
@@ -325,6 +327,7 @@
                 },
                 dataType:"json",
                 success:function (data) {
+                    console.log(data)
                     $("#movieName a:eq(0)").html(data.videoName);
                     $(".ab_title_hover:eq(0)").html(data.videoName);
                     $(".ab_title_hover:eq(1)").html(data.userInfo.userName);
