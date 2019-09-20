@@ -8,9 +8,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/emojione/1.5.2/assets/sprites/emojione.sprites.css" media="screen">
     <link rel="stylesheet" type="text/css" href="css/emojionearea.min.css" media="screen">
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="http://localhost:8080/js/jquery-3.4.1.min.js"></script>
-    <script src="http://localhost:8080/js/bootstrap.min.js"></script>
-    <script src="http://localhost:8080/js/layer/layer.js"></script>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/layer/layer.js"></script>
     <script src="js/vue.min.js"></script>
     <style type="text/css">
         li .dropdown-menu {
@@ -442,7 +442,7 @@
             $(this).parent().parent().next().next().toggle();
             //6获取头像
             $.ajax({
-                url:"http://localhost:8080/selectByPrimaryKey",
+                url:"/selectByPrimaryKey",
                 type:"post",
                 data:{
                     userId:sessionId,

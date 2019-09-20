@@ -523,7 +523,7 @@
 
         });
         $.ajax({
-            url:"http://localhost:8080/selectByPrimaryKey",
+            url:"/selectByPrimaryKey",
             type:"post",
             data:{
                 userId:userId,
@@ -535,7 +535,7 @@
             }
         })
         $.ajax({
-            url:"http://localhost:8080/searchCategory",
+            url:"/searchCategory",
             type:"post",
             data:{category:category},
             success:function (data) {
@@ -576,7 +576,7 @@
                 //最新排序
                 $("#ming").click(function(){
                     $.ajax({
-                        url:"http://localhost:8080/searchCategoryDESC",
+                        url:"/searchCategoryDESC",
                         type:"post",
                         data:{category:category},
                         success:function (data) {
@@ -619,7 +619,7 @@
                 //相关排序
                 $("#han").click(function(){
                     $.ajax({
-                        url:"http://localhost:8080/searchCategory",
+                        url:"/searchCategory",
                         type:"post",
                         data:{category:category},
                         success:function (data) {
@@ -662,7 +662,7 @@
                 //最热排序
                 $("#xi").click(function(){
                     $.ajax({
-                        url:"http://localhost:8080/searchCategoryHot",
+                        url:"/searchCategoryHot",
                         type:"post",
                         data:{category:category},
                         success:function (data) {
@@ -707,7 +707,7 @@
         })
         //搜索结果
         $.ajax({
-            url:"http://localhost:8080/searcher",
+            url:"/searcher",
             type:"post",
             data:{keyword:keyword},
             success:function (data) {
@@ -748,7 +748,7 @@
                 //相关排序
                 $("#han").click(function(){
                     $.ajax({
-                        url:"http://localhost:8080/searcher",
+                        url:"/searcher",
                         type:"post",
                         data:{keyword:keyword},
                         success:function (data) {
@@ -791,7 +791,7 @@
                 // 最热排序
                 $("#xi").click(function(){
                     $.ajax({
-                        url:"http://localhost:8080/searchHot",
+                        url:"/searchHot",
                         type:"post",
                         data:{keyword:keyword},
                         success:function (data) {
@@ -834,7 +834,7 @@
                 // 最新排序
                 $("#ming").click(function(){
                     $.ajax({
-                        url:"http://localhost:8080/searchDESC",
+                        url:"/searchDESC",
                         type:"post",
                         data:{keyword:keyword},
                         success:function (data) {

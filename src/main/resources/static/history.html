@@ -19,7 +19,7 @@
         $(function () {
             uId=sessionStorage.getItem("userId");
             $.ajax({
-                url: "http://localhost:8080/selecthistory",
+                url: "/selecthistory",
                 data: {"userId": uId},
                 type: "post",
                 dataType: "json",
@@ -70,7 +70,7 @@
 
             });
             $.ajax({
-                url:"http://localhost:8080/selectByPrimaryKey",
+                url:"/selectByPrimaryKey",
                 type:"post",
                 data:{
                     userId:uId,

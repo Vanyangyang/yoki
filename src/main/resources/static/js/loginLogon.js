@@ -112,7 +112,7 @@ $(function () {
                 $("#errorMsg1").text("请输入密码！");
             } else {
                 $.ajax({
-                    url: "http://localhost:8080/login1",
+                    url: "/login1",
                     type: "post",
                     data: {'telephone': $("#accountId1").val(), 'email': $("#accountId1").val()},
                     dataType: "json",
@@ -145,7 +145,7 @@ $(function () {
     $("#phoneNum").mouseleave(function () {
         var pNum = $("#phoneNum").val();
         $.ajax({
-            url: "http://localhost:8080/login2",
+            url: "/login2",
             type: "post",
             data: {'telephone': pNum},
             dataType: "json",
@@ -165,7 +165,7 @@ $(function () {
         var smsId = "SMS_174022776";
         a = code;
         $.ajax({
-            url: "http://localhost:8080/sms",
+            url: "/sms",
             type: "post",
             data: {'telephone': pNum, 'smsId': smsId, 'code': code},
             dataType: "json",
@@ -179,7 +179,7 @@ $(function () {
         var code = parseInt($("#actCode").val());
         if (code == a) {
             $.ajax({
-                url: "http://localhost:8080/login2",
+                url: "/login2",
                 type: "post",
                 data: {'telephone': pNum},
                 dataType: "json",
@@ -211,14 +211,14 @@ $(function () {
         var code = parseInt((Math.random() * 899999) + 100000);
         b = code;
         $.ajax({
-            url: "http://localhost:8080/login2",
+            url: "/login2",
             type: "post",
             data: {'telephone': pNum},
             dataType: "json",
             success: function (data) {
                 if (data.cNum == 0) {
                     $.ajax({
-                        url: "http://localhost:8080/sms",
+                        url: "/sms",
                         type: "post",
                         data: {'telephone': pNum, 'smsId': smsId, 'code': code},
                         dataType: "json",
@@ -240,7 +240,7 @@ $(function () {
         if ($("#agree").is(":checked")) {
             if (code == b) {
                 $.ajax({
-                    url: "http://localhost:8080/logon",
+                    url: "/logon",
                     type: "post",
                     data: {'telephone': pNum, 'password': pwd, 'userName': userName},
                     dataType: "json",
@@ -285,7 +285,7 @@ $(function () {
         var pNum = $("#pNum").val();
         c = code;
         $.ajax({
-            url: "http://localhost:8080/login2",
+            url: "/login2",
             type: "post",
             data: {'telephone': pNum},
             dataType: "json",
@@ -294,7 +294,7 @@ $(function () {
                     $("#errorMsg4").text("手机号未注册！")
                 } else {
                     $.ajax({
-                        url: "http://localhost:8080/sms",
+                        url: "/sms",
                         type: "post",
                         data: {'telephone': pNum, 'smsId': smsId, 'code': code},
                         dataType: "json",
@@ -312,7 +312,7 @@ $(function () {
         var pwd = $("#upPassword input").val();
         if (code == c) {
             $.ajax({
-                url: "http://localhost:8080/upPwd",
+                url: "/upPwd",
                 type: "post",
                 data: {'telephone': pNum, 'password': pwd},
                 dataType: "json",

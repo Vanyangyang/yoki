@@ -47,7 +47,7 @@
   <select id="login" resultMap="UserInfoMap">
     select user_id,
     count(user_id) cNum,password
-    from user_info where telephone=#{telephone,jdbcType=DECIMAL} or email=#{email,jdbcType=DECIMAL}
+    from user_info where telephone=#{param1} or email=#{param2}
   </select>
   <insert id="logon">
     insert into user_info ( user_name,

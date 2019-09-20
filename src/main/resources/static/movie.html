@@ -97,7 +97,7 @@
             if(pageNum==maxPage){
                 for(jj=(pageNum-1)*pageSize;jj<count;jj++){
                     $.ajax({
-                        url:"http://localhost:8080/getAllViReply",
+                        url:"/getAllViReply",
                         type:"post",
                         async:false,
                         data:{
@@ -132,7 +132,7 @@
             }else{
                 for(kk=(pageNum-1)*pageSize;kk<pageNum*pageSize;kk++){
                     $.ajax({
-                        url:"http://localhost:8080/getAllViReply",
+                        url:"/getAllViReply",
                         type:"post",
                         async:false,
                         data:{
@@ -166,7 +166,7 @@
         }
         function getAllReply(){
             $.ajax({
-                url:"http://localhost:8080/getAllViReply",
+                url:"/getAllViReply",
                 type:"post",
                 data:{
                     commentId:cId
@@ -187,7 +187,7 @@
         }
         function getAllComment(){
             $.ajax({
-                url:"http://localhost:8080/getAllComment",
+                url:"/getAllComment",
                 type:"post",
                 data:{
                     videoId:vId
@@ -218,7 +218,7 @@
                     $(".img5").on('click',function () {
                         cId=$(this).next().next().next().next().text();
                         $.ajax({
-                            url:"http://localhost:8080/like",
+                            url:"/like",
                             type:"post",
                             data:{
                                 commentId:cId
@@ -233,7 +233,7 @@
                         cId=$(this).next().next().text();
                         console.log(cId);
                         $.ajax({
-                            url:"http://localhost:8080/dislike",
+                            url:"/dislike",
                             type:"post",
                             data:{
                                 commentId:cId
@@ -264,7 +264,7 @@
                 cId=$(this).next().next().next().next().text();
                 console.log(cId);
                 $.ajax({
-                    url:"http://localhost:8080/like",
+                    url:"/like",
                     type:"post",
                     data:{
                         commentId:cId
@@ -279,7 +279,7 @@
                 cId=$(this).next().next().text();
                 console.log(cId);
                 $.ajax({
-                    url:"http://localhost:8080/dislike",
+                    url:"/dislike",
                     type:"post",
                     data:{
                         commentId:cId
@@ -306,7 +306,7 @@
             editor2.create();
             //6获取头像
             $.ajax({
-                url:"http://localhost:8080/selectByPrimaryKey",
+                url:"/selectByPrimaryKey",
                 type:"post",
                 data:{
                     userId:uId,
@@ -320,7 +320,7 @@
             //5视频信息
             //获取视频信息
             $.ajax({
-                url:"http://localhost:8080/getVideo",
+                url:"/getVideo",
                 type:"post",
                 data:{
                     videoId:vId
@@ -338,7 +338,7 @@
                     $("#video").append($video);
                     //打开显示是否关注
                     $.ajax({
-                        url:"http://localhost:8080/checkFocus",
+                        url:"/checkFocus",
                         type:"post",
                         data:{
                             fansId:uId,
@@ -357,7 +357,7 @@
             });
             //视频播放量
             $.ajax({
-                url:"http://localhost:8080/addBrowse",
+                url:"/addBrowse",
                 type:"post",
                 data:{
                     videoId:vId
@@ -370,7 +370,7 @@
             //点击关注关注
             $("#title_desc span:eq(2)").click(function () {
                 $.ajax({
-                    url:"http://localhost:8080/checkFocus",
+                    url:"/checkFocus",
                     type:"post",
                     data:{
                         fansId:uId,
@@ -380,7 +380,7 @@
                     success:function (data) {
                         if(data==0){
                             $.ajax({
-                                url:"http://localhost:8080/addFocus",
+                                url:"/addFocus",
                                 type:"post",
                                 data:{
                                     fansId:uId,
@@ -393,7 +393,7 @@
                             $("#title_desc span:eq(2)").html("已关注");
                         }else{
                             $.ajax({
-                                url:"http://localhost:8080/deleteFocus",
+                                url:"/deleteFocus",
                                 type:"post",
                                 data:{
                                     fansId:uId,
@@ -411,7 +411,7 @@
             //收藏------------------------------------------------------------------------------
             //打开显示是否收藏
             $.ajax({
-                url:"http://localhost:8080/checkCollect",
+                url:"/checkCollect",
                 type:"post",
                 data:{
                     videoId:vId,
@@ -429,7 +429,7 @@
             //点击收藏收藏
             $("#MovieBottomLeft li:eq(2)").click(function () {
                 $.ajax({
-                    url:"http://localhost:8080/checkCollect",
+                    url:"/checkCollect",
                     type:"post",
                     data:{
                         videoId:vId,
@@ -439,7 +439,7 @@
                     success:function (data) {
                         if(data==0){
                             $.ajax({
-                                url:"http://localhost:8080/addCollect",
+                                url:"/addCollect",
                                 type:"post",
                                 data:{
                                     videoId:vId,
@@ -452,7 +452,7 @@
                             $("#MovieBottomLeft li:eq(2) div").css("background-position","-330px 0px");
                         }else{
                             $.ajax({
-                                url:"http://localhost:8080/deleteCollect",
+                                url:"/deleteCollect",
                                 type:"post",
                                 data:{
                                     videoId:vId,
@@ -471,7 +471,7 @@
             $("#comment_doSubmit").click(function () {
                 var content = editor.txt.text();
                 $.ajax({
-                    url:"http://localhost:8080/vCommentSubmit",
+                    url:"/vCommentSubmit",
                     type:"post",
                     data:{
                         commentContent:content,
@@ -491,7 +491,7 @@
                 $(".inComment").remove();
                 var content = editor2.txt.text();
                 $.ajax({
-                    url:"http://localhost:8080/insertViReply",
+                    url:"/insertViReply",
                     type:"post",
                     data:{
                         replyContent:content,
@@ -501,7 +501,7 @@
                     dataType:"json",
                     success:function (data) {
                         $.ajax({
-                            url:"http://localhost:8080/getAllViReply",
+                            url:"/getAllViReply",
                             type:"post",
                             data:{
                                 userId:uId,
@@ -587,7 +587,7 @@
             //弹幕数据
              var dataBarrage= [];
             $.ajax({
-                url:"http://localhost:8080/getAllBarrage",
+                url:"/getAllBarrage",
                 type:"post",
                 data:{
                     videoId: 1,
@@ -634,7 +634,7 @@
                         time: time,
                     });
                     $.ajax({
-                        url:"http://localhost:8080/insertBarrage",
+                        url:"/insertBarrage",
                         type:"post",
                         data:{
                             value: value,

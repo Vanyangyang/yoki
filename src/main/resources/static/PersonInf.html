@@ -16,7 +16,7 @@
         $(function () {
             $("#getId").val(uId);
             $.ajax({
-                url: "http://localhost:8080/getuser",
+                url: "/getuser",
                 data: {"userId": uId},
                 type: "post",
                 dataType: "json",
@@ -71,12 +71,12 @@
             $("#bangding a").click(function () {
                 var email = $("#youxiang ").val();
                 $.ajax({
-                    url: "http://localhost:8080/updateByPrimaryKeySelective",
+                    url: "/updateByPrimaryKeySelective",
                     type: "post",
                     data: {"email": email, "userId": 1},
                     dataType: "json",
                     success: function () {
-                        $(location).attr('href', 'http://localhost:8080/PersonInf.html');
+                        $(location).attr('href', '/PersonInf.html');
                     }
                 })
             });
@@ -86,12 +86,12 @@
                 if (email == null) {
                 } else {
                     $.ajax({
-                        url: "http://localhost:8080/updateByPrimaryKeySelective",
+                        url: "/updateByPrimaryKeySelective",
                         type: "post",
                         data: {"telephone": telephone, "userId": 1},
                         dataType: "json",
                         success: function () {
-                            // $(location).attr('href', 'http://localhost:8080/PersonInf.html');
+                            // $(location).attr('href', '/PersonInf.html');
                         }
                     })
                 }
@@ -101,23 +101,23 @@
             $("#xiugaimima").click(function () {
                 var mima = $("#mima").val();
                 $.ajax({
-                    url: "http://localhost:8080/updateByPrimaryKeySelective",
+                    url: "/updateByPrimaryKeySelective",
                     type: "post",
                     data: {"password": mima, "userId": 1},
                     dataType: "json",
                     success: function () {
-                        // $(location).attr('href', 'http://localhost:8080/PersonInf.html');
+                        // $(location).attr('href', '/PersonInf.html');
                     }
                 })
             });
             $("#zhuxiao").click(function () {
                 $.ajax({
-                    url: "http://localhost:8080/deleteByPrimaryKey",
+                    url: "/deleteByPrimaryKey",
                     data: {"userId": 1},
                     type: "post",
                     dataType: "json",
                     success: function () {
-                        // $(location).attr('href', 'http://localhost:8080/PersonInf.html');
+                        // $(location).attr('href', '/PersonInf.html');
                     }
                 })
             });
@@ -132,12 +132,12 @@
                 var jianjie=$("#information textarea[name=jianjie]").val();
 
                 $.ajax({
-                    url: "http://localhost:8080/updateByPrimaryKeySelective",
+                    url: "/updateByPrimaryKeySelective",
                     type: "post",
                     data: {"userName": name, "userId": 1,"sex":sex,"year":year,"month":month,"day":day,"address":address,"userIntro":jianjie},
                     dataType: "json",
                     success: function () {
-                        // $(location).attr('href', 'http://localhost:8080/PersonInf.html');
+                        // $(location).attr('href', '/PersonInf.html');
                     }
                 })
 
@@ -146,12 +146,12 @@
             // $("#xiugaipic").click(function () {
             //      var filename = document.getElementById("face1").value;
             //     $.ajax({
-            //         url: "http://localhost:8080/updatepic",
+            //         url: "/updatepic",
             //         type: "post",
             //         data: {"files":filename,"userId":uId},
             //         dataType: "json",
             //         success: function () {
-            //             $(location).attr('href', 'http://localhost:8080/PersonInf.html');
+            //             $(location).attr('href', '/PersonInf.html');
             //         }
             //     })
             //
