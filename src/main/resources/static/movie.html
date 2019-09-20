@@ -306,7 +306,17 @@
             editor2.create();
             //加历史记录
             $(window).unload(function(){
-                alert("页面要关闭了");
+                $.ajax({
+                    url:"/insertHistory",
+                    type:"post",
+                    data:{
+                        userId:uId,
+                        videoId:vId
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                    }
+                })
             })
             //6获取头像
             $.ajax({

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface VideoCommentReplyMapper {
-    List<VideoCommentReply> getAllViReply(Integer userId, Integer commentId);
+    List<VideoCommentReply> getAllViReply(Integer commentId);
 
     int deleteByPrimaryKey(Integer replyId);
 

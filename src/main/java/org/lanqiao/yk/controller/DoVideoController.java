@@ -18,6 +18,10 @@ public class DoVideoController {
     @Autowired
     VideoCommentMapper videoCommentMapper;
 
+    @RequestMapping("/insertHistory")
+    public int insertHistory(UserHistory userHistory) {
+        return videoBarrageService.insertHistory(userHistory);
+    }
     @RequestMapping("/selectByPrimaryKey")
     public UserInfo selectByPrimaryKey(Integer userId) {
         return videoBarrageService.selectByPrimaryKey(userId);
@@ -70,13 +74,13 @@ public class DoVideoController {
     }
     //得到所有回复
     @RequestMapping("/getAllViReply")
-    public List<VideoCommentReply> getAllViReply(Integer userId, Integer commentId) {
-        return videoBarrageService.getAllViReply(userId,commentId);
+    public List<VideoCommentReply> getAllViReply(Integer commentId) {
+        return videoBarrageService.getAllViReply(commentId);
     }
 
     @RequestMapping("/getAllComment")
-    public List<VideoComment> getAllComment(Integer userId, Integer videoId) {
-        return videoCommentMapper.getAllComment(userId,videoId);
+    public List<VideoComment> getAllComment(Integer videoId) {
+        return videoCommentMapper.getAllComment(videoId);
     }
 
     @RequestMapping("/vCommentSubmit")

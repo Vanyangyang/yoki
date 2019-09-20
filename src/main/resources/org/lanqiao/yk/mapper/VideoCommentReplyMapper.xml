@@ -29,8 +29,8 @@
     <result column="telephone" property="telephone" jdbcType="DECIMAL" />
     <result column="cNum" property="cNum" jdbcType="INTEGER"/>
   </resultMap>
-  <select id="getAllViReply" resultMap="ViReplyResultMap">
-    select * from video_comment_reply vc,user_info u where comment_id=#{param1} and vc.user_id=u.user_id
+  <select id="getAllViReply" resultMap="ViReplyResultMap" parameterType="java.lang.Integer">
+    select * from video_comment_reply vc,user_info u where comment_id=#{commentId} and vc.user_id=u.user_id
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

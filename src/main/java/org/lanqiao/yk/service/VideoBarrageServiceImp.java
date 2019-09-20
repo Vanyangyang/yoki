@@ -23,6 +23,13 @@ public class VideoBarrageServiceImp implements VideoBarrageService {
     UserFocusMapper userFocusMapper;
     @Autowired
     UserInfoMapper userInfoMapper;
+    @Autowired
+    UserHistoryMapper userHistoryMapper;
+
+    @Override
+    public int insertHistory(UserHistory userHistory) {
+        return userHistoryMapper.insertSelective(userHistory);
+    }
 
     @Override
     public UserInfo selectByPrimaryKey(Integer userId) {
@@ -85,13 +92,13 @@ public class VideoBarrageServiceImp implements VideoBarrageService {
     }
 
     @Override
-    public List<VideoCommentReply> getAllViReply(Integer userId, Integer commentId) {
-        return videoCommentReplyMapper.getAllViReply(userId,commentId);
+    public List<VideoCommentReply> getAllViReply(Integer commentId) {
+        return videoCommentReplyMapper.getAllViReply(commentId);
     }
 
     @Override
-    public List<VideoComment> getAllComment(Integer userId, Integer videoId) {
-        return videoCommentMapper.getAllComment(userId,videoId);
+    public List<VideoComment> getAllComment(Integer videoId) {
+        return videoCommentMapper.getAllComment(videoId);
     }
 
     @Override

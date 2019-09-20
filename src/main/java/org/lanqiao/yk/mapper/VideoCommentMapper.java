@@ -11,7 +11,7 @@ public interface VideoCommentMapper {
 
     int like(Integer commentId);
 
-    List<VideoComment> getAllComment(Integer userId,Integer videoId);
+    List<VideoComment> getAllComment(Integer videoId);
 
     int deleteByPrimaryKey(Integer commentId);
 

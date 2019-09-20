@@ -5,6 +5,8 @@ import org.lanqiao.yk.entity.*;
 import java.util.List;
 
 public interface VideoBarrageService {
+    int insertHistory (UserHistory userHistory);
+
     UserInfo selectByPrimaryKey(Integer userId);
 
     int addBrowse (Integer videoId);
@@ -29,9 +31,9 @@ public interface VideoBarrageService {
 
     int insertViReply(VideoCommentReply reply);
 
-    List<VideoCommentReply> getAllViReply(Integer userId, Integer commentId);
+    List<VideoCommentReply> getAllViReply(Integer commentId);
 
-    List<VideoComment> getAllComment(Integer userId,Integer videoId);
+    List<VideoComment> getAllComment(Integer videoId);
 
     int vCommentSubmit(VideoComment videoComment);
 
