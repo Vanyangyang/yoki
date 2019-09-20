@@ -23,7 +23,7 @@
     width:260px;height:420px;
     background: black;
     opacity: 0.6;
-    right:100px;
+    right:190px;
     top:0px;
     z-index: 100;
 }
@@ -31,9 +31,9 @@
     position: absolute;
     width:260px;height:420px;
     background: none;
-    right:100px;
+    right:190px;
     top:0px;
-    z-index: 9999;
+    z-index: 9998;
 
 }
 
