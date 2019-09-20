@@ -1,2 +1,0 @@
-# yoki
-yokiVideoPlayerWeb
