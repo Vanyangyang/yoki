@@ -153,6 +153,20 @@
 
 
             })
+            $("#xiugaipic").click((function () {
+                    $("form").submit();
+                    $.ajax({
+                        url: "http://localhost:8080/getuser",
+                        data: {"userId": uId},
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            $("#icon_avatar img").attr("src",data[0].facePic)
+                        }
+                    });
+
+                })
+            )
             // $("#xiugaipic").click(function () {
             //      var filename = document.getElementById("face1").value;
             //     $.ajax({
@@ -337,7 +351,7 @@
                     <!--            <div id="faceimage"><input type="image" width="80px"height="80px"></div>-->
                     <img id="photo" src="image/头像demo.png" width="80px" style="display: block;margin-bottom: 10px"/>
                     <input type="file" id="face1"name="files" onchange="preImg(this.id,'photo');" >
-                    <input type="submit"id="xiugaipic" value="修改">
+                    <input type="button"id="xiugaipic" value="修改">
 
                 </form>
                 <iframe name="stop" style="display:none;"></iframe>

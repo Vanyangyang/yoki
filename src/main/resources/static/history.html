@@ -24,48 +24,38 @@
                 type: "post",
                 dataType: "json",
                 success: function (data) {
-                    var i,j,n;
-                    var m=0;
+                    var i,j;
                     var temp;
                     out1:
-                    for ( i=0;i<data.length;i++){
+                        for ( i=0;i<data.length;i++){
+                            temp=gettime(data[i].seeTime);
+                            console.log(data.length-1);
+                            var $si=$("<div class=\"detail1\">\n" +
+                                "        <input class=\"time1\" type=\"image\"width=\"18px\"height=\"18px\"src=\"image/yuan.png\">\n" +
+                                "    <div class=\"time2\">"+temp+"</div>\n" +
+                                "    </div>")
+                            $("#detail").append($si);
+                            for ( j = i; j < data.length; j++) {
+                                if(gettime(data[j].seeTime)==temp){
+                                    var $li = $("  <div class=\"detail2\">\n" +
+                                        "    <input class=\"picc\" type=\"image\" height=\"90px\"src=\""+data[j].videoPicMov.videoPic+"\">\n" +
+                                        "    <div class=\"introduce\">"+data[j].videoInfo.videoName+"</div>\n" +
 
-                        temp=gettime(data[i].seeTime);
-                        console.log(data.length-1);
-                        var $si=$("<div class=\"detail1\">\n" +
-                            "        <input class=\"time1\" type=\"image\"width=\"18px\"height=\"18px\"src=\"image/yuan.png\">\n" +
-                            "    <div class=\"time2\">"+temp+"</div>\n" +
-                            "    </div>")
-
-                        $("#detail").append($si);
-                        n=i;
-
-                        for ( j = n; j < data.length; j++) {
-                            if(gettime(data[j].seeTime)==temp){
-                                var $li = $("  <div class=\"detail2\">\n" +
-                                    "    <input class=\"picc\" type=\"image\" width=\"161px\" height=\"90px\"src=\""+data[j].videoPicMov.videoPic+"\">\n" +
-                                    "    <div class=\"introduce\">"+data[j].videoInfo.videoName+"</div>\n" +
-
-                                    "</div>");
-                                $("#detail").append($li);
-                                n=n+1;
-
-
-                                if(i==data.length-1){
-                                    m=data.length;
+                                        "</div>");
+                                    $("#detail").append($li);
+                                    if(j==data.length-1){
+                                        i=data.length;
+                                    }
                                 }else{
-
+                                    i=j-1;
+                                    continue out1;
+                                    break;
                                 }
-                            }else{
-                                i=n-1;
-                            alert(i);
-                                continue out1;
-                                break;
                             }
+
+
                         }
 
-
-                    }
                 }
 
             });
@@ -88,6 +78,7 @@
                     }else {
                         $("#icon_avatar img").attr("src", data.facePic);
                     }
+                    $("#name").html(data.userName);
                 }
             })
 

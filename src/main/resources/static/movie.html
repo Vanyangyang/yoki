@@ -547,7 +547,7 @@
                         })
                     }
                 })
-                editor.txt.html("");
+                editor2.txt.html("");
             })
             // style="color: white;background-color: #C6C6C6"
             $(".lastPage").click(function () {
@@ -608,7 +608,7 @@
                 url:"/getAllBarrage",
                 type:"post",
                 data:{
-                    videoId: 1,
+                    videoId: vId,
                 },
                 dataType:"json",
                 success:function (data) {
@@ -658,6 +658,8 @@
                             value: value,
                             color: color,
                             time: time,
+                            videoId:vId,
+                            userId:uId
                         },
                         dataType:"json",
                         success:function (data) {
@@ -996,23 +998,43 @@
             <div id="relatedMovieTitle"><span class="a5a5a5 f14 fw">节目相关片段</span></div>
             <a href="#"><div class="relatedMovie">
                 <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
-                <div class="relatedText1 a5a5a5 f14">陈老师来了！</div>
+                <div class="relatedText1 a5a5a5 f14">一个成熟的男人。</div>
                 <div class="relatedText2 a5a5a5 f12">热度 4396</div>
             </div></a>
             <a href="#"><div class="relatedMovie">
-                <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
-                <div class="relatedText1 a5a5a5 f14">陈老师来了！</div>
-                <div class="relatedText2 a5a5a5 f12">热度 4396</div>
+                <div class="relatedPic"><img style="width: 116px" src="image/relatedPic2.webp"></div>
+                <div class="relatedText1 a5a5a5 f14">充满了丰收的喜悦！</div>
+                <div class="relatedText2 a5a5a5 f12">热度 6324</div>
             </div></a>
             <a href="#"><div class="relatedMovie">
-                <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
-                <div class="relatedText1 a5a5a5 f14">陈老师来了！</div>
-                <div class="relatedText2 a5a5a5 f12">热度 4396</div>
+                <div class="relatedPic"><img style="width: 116px" src="image/h25.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">爱情的8000</div>
+                <div class="relatedText2 a5a5a5 f12">热度 8000</div>
             </div></a>
             <a href="#"><div class="relatedMovie">
-                <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
-                <div class="relatedText1 a5a5a5 f14">陈老师来了！</div>
-                <div class="relatedText2 a5a5a5 f12">热度 4396</div>
+                <div class="relatedPic"><img style="width: 116px" src="image/h26.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">犹豫就是白给</div>
+                <div class="relatedText2 a5a5a5 f12">热度 8848</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h27.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">你怎么穿着品如的衣服</div>
+                <div class="relatedText2 a5a5a5 f12">热度 5779</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h24.gif"></div>
+                <div class="relatedText1 a5a5a5 f14">摇就完事了</div>
+                <div class="relatedText2 a5a5a5 f12">热度 4955</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h23.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">重返17岁</div>
+                <div class="relatedText2 a5a5a5 f12">热度 1234</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h22.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">谈笑间，樯橹灰飞烟灭</div>
+                <div class="relatedText2 a5a5a5 f12">热度 3124</div>
             </div></a>
         </div>
     </div>
@@ -1099,23 +1121,43 @@
         <div id="content_like_title" class="f26 fimp f333">相关精彩视频</div>
         <a href="#"><div class="relatedMovie">
             <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
-            <div class="relatedText1 a5a5a5 f14">陈老师来了！</div>
+            <div class="relatedText1 a5a5a5 f14">一个成熟的男人。</div>
             <div class="relatedText2 a5a5a5 f12">热度 4396</div>
         </div></a>
         <a href="#"><div class="relatedMovie">
-            <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
-            <div class="relatedText1 a5a5a5 f14">陈老师来了！</div>
-            <div class="relatedText2 a5a5a5 f12">热度 4396</div>
+            <div class="relatedPic"><img style="width: 116px" src="image/relatedPic2.webp"></div>
+            <div class="relatedText1 a5a5a5 f14">充满了丰收的喜悦！</div>
+            <div class="relatedText2 a5a5a5 f12">热度 6324</div>
         </div></a>
         <a href="#"><div class="relatedMovie">
-            <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
-            <div class="relatedText1 a5a5a5 f14">陈老师来了！</div>
-            <div class="relatedText2 a5a5a5 f12">热度 4396</div>
+            <div class="relatedPic"><img style="width: 116px" src="image/h25.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">爱情的8000</div>
+            <div class="relatedText2 a5a5a5 f12">热度 8000</div>
         </div></a>
         <a href="#"><div class="relatedMovie">
-            <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
-            <div class="relatedText1 a5a5a5 f14">陈老师来了！</div>
-            <div class="relatedText2 a5a5a5 f12">热度 4396</div>
+            <div class="relatedPic"><img style="width: 116px" src="image/h26.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">犹豫就是白给</div>
+            <div class="relatedText2 a5a5a5 f12">热度 8848</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h27.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">你怎么穿着品如的衣服</div>
+            <div class="relatedText2 a5a5a5 f12">热度 5779</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h24.gif"></div>
+            <div class="relatedText1 a5a5a5 f14">摇就完事了</div>
+            <div class="relatedText2 a5a5a5 f12">热度 4955</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h23.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">重返17岁</div>
+            <div class="relatedText2 a5a5a5 f12">热度 1234</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h22.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">谈笑间，樯橹灰飞烟灭</div>
+            <div class="relatedText2 a5a5a5 f12">热度 3124</div>
         </div></a>
     </div>
 </div>

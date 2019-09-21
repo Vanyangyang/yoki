@@ -473,6 +473,10 @@
 </body>
 </html>
 <script>
+    var keyword=decodeURI(getUrlParam("keyword"));
+    var category=decodeURI(getUrlParam("category"));
+    console.log(keyword);
+    console.log(category);
     var userId=sessionStorage.getItem("userId");
     // 热播滚动
     $(window).scroll(function(){
@@ -487,7 +491,6 @@
     });
     //搜索跳转
     $(function(){
-        var keyword;
         $("#button").click(function(){
             keyword = $("#search").val();
             location.href="searchpage.html?keyword="+encodeURI(encodeURI(keyword));
@@ -507,8 +510,6 @@
         }
     });
     $(function() {
-        var keyword=decodeURI(getUrlParam("keyword"));
-        var category=decodeURI(getUrlParam("category"))
         // alert(category);
         // alert(keyword);
         $(window).bind("scroll" ,function() {
@@ -530,353 +531,354 @@
             },
             dataType:"json",
             success:function (data) {
-                console.log(data);
                 $("#userName").html(data.userName);
             }
         })
-        $.ajax({
-            url:"/searchCategory",
-            type:"post",
-            data:{category:category},
-            success:function (data) {
-                console.log(data);
-                $(".search_content").children().remove();
-                for(var i=0;i<data.length;i++){
-                    data[i].videoCreateTime=formatDate( data[i].videoCreateTime);
-                    var $search_pic = $("<div class=\"search_pic\">\n" +
-                        "\n" +
-                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
-                        "                    <div class=\"content_meg\">\n" +
-                        "                        <div class=\"content_title\">\n" +
-                        "                            <ul>\n" +
-                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
-                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
-                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
-                        "                            </ul>\n" +
-                        "                        </div>\n" +
-                        "                        <div class=\"actor\">\n" +
-                        "                            <ul>\n" +
-                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
-                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
-                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
-                        "                                <li class=\"director\">\n" +
-                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
-                        "                                </li>\n" +
-                        "                            </ul>\n" +
-                        "                        </div>\n" +
-                        "                        <div class=\"text\">\n" +
-                        "                            简介:&nbsp;&nbsp;\n" +
-                        "                            "+data[i].videoDescript +"\n" +
-                        "                        </div>\n" +
-                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
-                        "                    </div>\n" +
-                        "                </div>")
-                    $(".search_content").append($search_pic);
-                }
-                //最新排序
-                $("#ming").click(function(){
-                    $.ajax({
-                        url:"/searchCategoryDESC",
-                        type:"post",
-                        data:{category:category},
-                        success:function (data) {
-                            $(".search_content").children().remove();
-                            for(var i=0;i<data.length;i++){
-                                data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
-                                var $search_pic = $("<div class=\"search_pic\">\n" +
-                                    "\n" +
-                                    "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
-                                    "                    <div class=\"content_meg\">\n" +
-                                    "                        <div class=\"content_title\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
-                                    "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
-                                    "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"actor\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li>导演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
-                                    "                                <li>主演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\">\n" +
-                                    "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
-                                    "                                </li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"text\">\n" +
-                                    "                            简介:&nbsp;&nbsp;\n" +
-                                    "                            "+data[i].videoDescript +"\n" +
-                                    "                        </div>\n" +
-                                    "                        <div><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"> </div>\n" +
-                                    "                    </div>\n" +
-                                    "                </div>")
-                                $(".search_content").append($search_pic);
+        //分类搜索
+        if (keyword=="null"){
+            $.ajax({
+                url:"/searchCategory",
+                type:"post",
+                data:{category:category},
+                success:function (data) {
+                    $(".search_content").children().remove();
+                    for(var i=0;i<data.length;i++){
+                        data[i].videoCreateTime=formatDate( data[i].videoCreateTime);
+                        var $search_pic = $("<div class=\"search_pic\">\n" +
+                            "\n" +
+                            "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                            "                    <div class=\"content_meg\">\n" +
+                            "                        <div class=\"content_title\">\n" +
+                            "                            <ul>\n" +
+                            "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                            "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                            "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                            "                            </ul>\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"actor\">\n" +
+                            "                            <ul>\n" +
+                            "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                            "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                            "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                            "                                <li class=\"director\">\n" +
+                            "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                            "                                </li>\n" +
+                            "                            </ul>\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"text\">\n" +
+                            "                            简介:&nbsp;&nbsp;\n" +
+                            "                            "+data[i].videoDescript +"\n" +
+                            "                        </div>\n" +
+                            "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                            "                    </div>\n" +
+                            "                </div>")
+                        $(".search_content").append($search_pic);
+                    }
+                    //最新排序
+                    $("#ming").click(function(){
+                        $.ajax({
+                            url:"/searchCategoryDESC",
+                            type:"post",
+                            data:{category:category},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
                             }
-                        }
+                        })
                     })
-                })
-                //相关排序
-                $("#han").click(function(){
-                    $.ajax({
-                        url:"/searchCategory",
-                        type:"post",
-                        data:{category:category},
-                        success:function (data) {
-                            $(".search_content").children().remove();
-                            for(var i=0;i<data.length;i++){
-                                data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
-                                var $search_pic = $("<div class=\"search_pic\">\n" +
-                                    "\n" +
-                                    "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
-                                    "                    <div class=\"content_meg\">\n" +
-                                    "                        <div class=\"content_title\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
-                                    "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
-                                    "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"actor\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li>导演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
-                                    "                                <li>主演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\">\n" +
-                                    "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
-                                    "                                </li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"text\">\n" +
-                                    "                            简介:&nbsp;&nbsp;\n" +
-                                    "                            "+data[i].videoDescript +"\n" +
-                                    "                        </div>\n" +
-                                    "                        <div><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"> </div>\n" +
-                                    "                    </div>\n" +
-                                    "                </div>")
-                                $(".search_content").append($search_pic);
+                    //相关排序
+                    $("#han").click(function(){
+                        $.ajax({
+                            url:"/searchCategory",
+                            type:"post",
+                            data:{category:category},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
                             }
-                        }
+                        })
                     })
-                })
-                //最热排序
-                $("#xi").click(function(){
-                    $.ajax({
-                        url:"/searchCategoryHot",
-                        type:"post",
-                        data:{category:category},
-                        success:function (data) {
-                            $(".search_content").children().remove();
-                            for(var i=0;i<data.length;i++){
-                                data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
-                                var $search_pic = $("<div class=\"search_pic\">\n" +
-                                    "\n" +
-                                    "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
-                                    "                    <div class=\"content_meg\">\n" +
-                                    "                        <div class=\"content_title\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
-                                    "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
-                                    "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"actor\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li>导演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
-                                    "                                <li>主演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\">\n" +
-                                    "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
-                                    "                                </li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"text\">\n" +
-                                    "                            简介:&nbsp;&nbsp;\n" +
-                                    "                            "+data[i].videoDescript +"\n" +
-                                    "                        </div>\n" +
-                                    "                        <div><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"> </div>\n" +
-                                    "                    </div>\n" +
-                                    "                </div>")
-                                $(".search_content").append($search_pic);
+                    //最热排序
+                    $("#xi").click(function(){
+                        $.ajax({
+                            url:"/searchCategoryHot",
+                            type:"post",
+                            data:{category:category},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
                             }
-                        }
+                        })
                     })
-                })
 
-            }
-        })
-        //搜索结果
-        $.ajax({
-            url:"/searcher",
-            type:"post",
-            data:{keyword:keyword},
-            success:function (data) {
-                console.log(data);
-                $(".search_content").children().remove();
-                for(var i=0;i<data.length;i++){
-                    data[i].videoCreateTime=formatDate( data[i].videoCreateTime);
-                    var $search_pic = $("<div class=\"search_pic\">\n" +
-                        "\n" +
-                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
-                        "                    <div class=\"content_meg\">\n" +
-                        "                        <div class=\"content_title\">\n" +
-                        "                            <ul>\n" +
-                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
-                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
-                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
-                        "                            </ul>\n" +
-                        "                        </div>\n" +
-                        "                        <div class=\"actor\">\n" +
-                        "                            <ul>\n" +
-                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
-                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
-                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
-                        "                                <li class=\"director\">\n" +
-                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
-                        "                                </li>\n" +
-                        "                            </ul>\n" +
-                        "                        </div>\n" +
-                        "                        <div class=\"text\">\n" +
-                        "                            简介:&nbsp;&nbsp;\n" +
-                        "                            "+data[i].videoDescript +"\n" +
-                        "                        </div>\n" +
-                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a></div>\n" +
-                        "                    </div>\n" +
-                        "                </div>")
-                    $(".search_content").append($search_pic);
                 }
-                //相关排序
-                $("#han").click(function(){
-                    $.ajax({
-                        url:"/searcher",
-                        type:"post",
-                        data:{keyword:keyword},
-                        success:function (data) {
-                            $(".search_content").children().remove();
-                            for(var i=0;i<data.length;i++){
-                                data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
-                                var $search_pic = $("<div class=\"search_pic\">\n" +
-                                    "\n" +
-                                    "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
-                                    "                    <div class=\"content_meg\">\n" +
-                                    "                        <div class=\"content_title\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
-                                    "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
-                                    "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"actor\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li>导演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
-                                    "                                <li>主演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\">\n" +
-                                    "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
-                                    "                                </li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"text\">\n" +
-                                    "                            简介:&nbsp;&nbsp;\n" +
-                                    "                            "+data[i].videoDescript +"\n" +
-                                    "                        </div>\n" +
-                                    "                        <div><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"> </div>\n" +
-                                    "                    </div>\n" +
-                                    "                </div>")
-                                $(".search_content").append($search_pic);
+            });
+        }else{
+            //结果搜索
+            $.ajax({
+                url:"/searcher",
+                type:"post",
+                data:{keyword:keyword},
+                success:function (data) {
+                    console.log(data);
+                    $(".search_content").children().remove();
+                    for(var i=0;i<data.length;i++){
+                        data[i].videoCreateTime=formatDate( data[i].videoCreateTime);
+                        var $search_pic = $("<div class=\"search_pic\">\n" +
+                            "\n" +
+                            "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                            "                    <div class=\"content_meg\">\n" +
+                            "                        <div class=\"content_title\">\n" +
+                            "                            <ul>\n" +
+                            "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                            "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                            "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                            "                            </ul>\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"actor\">\n" +
+                            "                            <ul>\n" +
+                            "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                            "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                            "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                            "                                <li class=\"director\">\n" +
+                            "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                            "                                </li>\n" +
+                            "                            </ul>\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"text\">\n" +
+                            "                            简介:&nbsp;&nbsp;\n" +
+                            "                            "+data[i].videoDescript +"\n" +
+                            "                        </div>\n" +
+                            "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a></div>\n" +
+                            "                    </div>\n" +
+                            "                </div>")
+                        $(".search_content").append($search_pic);
+                    }
+                    //相关排序
+                    $("#han").click(function(){
+                        $.ajax({
+                            url:"/searcher",
+                            type:"post",
+                            data:{keyword:keyword},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
                             }
-                        }
+                        })
                     })
-                })
-                // 最热排序
-                $("#xi").click(function(){
-                    $.ajax({
-                        url:"/searchHot",
-                        type:"post",
-                        data:{keyword:keyword},
-                        success:function (data) {
-                            $(".search_content").children().remove();
-                            for(var i=0;i<data.length;i++){
-                                data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
-                                var $search_pic = $("<div class=\"search_pic\">\n" +
-                                    "\n" +
-                                    "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
-                                    "                    <div class=\"content_meg\">\n" +
-                                    "                        <div class=\"content_title\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
-                                    "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
-                                    "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"actor\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li>导演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
-                                    "                                <li>主演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\">\n" +
-                                    "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
-                                    "                                </li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"text\">\n" +
-                                    "                            简介:&nbsp;&nbsp;\n" +
-                                    "                            "+data[i].videoDescript +"\n" +
-                                    "                        </div>\n" +
-                                    "                        <div><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"> </div>\n" +
-                                    "                    </div>\n" +
-                                    "                </div>")
-                                $(".search_content").append($search_pic);
+                    // 最热排序
+                    $("#xi").click(function(){
+                        $.ajax({
+                            url:"/searchHot",
+                            type:"post",
+                            data:{keyword:keyword},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
                             }
-                        }
+                        })
                     })
-                })
-                // 最新排序
-                $("#ming").click(function(){
-                    $.ajax({
-                        url:"/searchDESC",
-                        type:"post",
-                        data:{keyword:keyword},
-                        success:function (data) {
-                            $(".search_content").children().remove();
-                            for(var i=0;i<data.length;i++){
-                                data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
-                                var $search_pic = $("<div class=\"search_pic\">\n" +
-                                    "\n" +
-                                    "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
-                                    "                    <div class=\"content_meg\">\n" +
-                                    "                        <div class=\"content_title\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
-                                    "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
-                                    "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"actor\">\n" +
-                                    "                            <ul>\n" +
-                                    "                                <li>导演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
-                                    "                                <li>主演:&nbsp;&nbsp;</li>\n" +
-                                    "                                <li class=\"director\">\n" +
-                                    "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
-                                    "                                </li>\n" +
-                                    "                            </ul>\n" +
-                                    "                        </div>\n" +
-                                    "                        <div class=\"text\">\n" +
-                                    "                            简介:&nbsp;&nbsp;\n" +
-                                    "                            "+data[i].videoDescript +"\n" +
-                                    "                        </div>\n" +
-                                    "                        <div><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"> </div>\n" +
-                                    "                    </div>\n" +
-                                    "                </div>")
-                                $(".search_content").append($search_pic);
+                    // 最新排序
+                    $("#ming").click(function(){
+                        $.ajax({
+                            url:"/searchDESC",
+                            type:"post",
+                            data:{keyword:keyword},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
                             }
-                        }
+                        })
                     })
-                })
-            }
-        })
-
+                }
+            });
+        }
     })
 
 

@@ -22,8 +22,8 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public int logon(Long telephone, String userName, String password) {
-        return userInfoMapper.logon(telephone,userName,password);
+    public int logon(UserInfo record) {
+        return userInfoMapper.insertSelective(record);
     }
     @Override
     public int upPwd(Long telephone, String password) {

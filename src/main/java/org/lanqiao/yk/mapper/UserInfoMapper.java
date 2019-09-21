@@ -20,7 +20,6 @@ public interface UserInfoMapper {
 
     UserInfo login(String telephone,String email);
     UserInfo login(String telephone);
-    int logon(Long telephone,String userName,String password);
     int upPwd(Long telephone,String password);
     UserInfo selectUser(Integer id);
     String searchusername(Integer userId);

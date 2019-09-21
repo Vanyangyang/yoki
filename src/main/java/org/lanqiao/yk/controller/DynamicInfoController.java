@@ -33,7 +33,7 @@ public class DynamicInfoController {
                 String name= UUID.randomUUID().toString().replaceAll("-","");
                 //设置图片上传的路径
                 try {
-                    files.transferTo(new File("D://tomcatupload/image/"+name+names[1]));
+                    files.transferTo(new File("/home/image/"+name+names[1]));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

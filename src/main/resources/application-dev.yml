@@ -17,6 +17,6 @@ mybatis:
 logging:
   level:
     com.lanqiao.jd.mapper: DEBUG
-
+#路径为硬盘路径，如果是centos服务器则改为相应路径
 web:
-  uploadPath: D://tomcatupload
+  uploadPath: /home

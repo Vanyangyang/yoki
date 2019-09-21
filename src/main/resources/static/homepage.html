@@ -141,7 +141,7 @@
                 <div class="message_content" id="pic3"><a href="history.html"><img src="image/clock.svg" id="pic3_1"><span class="message_text">记录</span></a> </div>
                 <div class="message_content" id="pic4"><a href="yk_dynamic2.html"><img src="image/down.svg" id="pic4_1"><span class="message_text">动态</span></a> </div>
                 <div class="message_content" id="pic5"><a href="yk_dynamic2.html"><img src="image/com.svg" id="pic5_1"><span class="message_text1">动态</span></a> </div>
-                <div class="message_content1"><a href="PersonInf.html"><img id="facPic" src=""> </a></div>
+                <div class="message_content1"><a href="PersonInf.html"><img id="facPic" src="image/1.jpg"> </a></div>
             </div>
 
         </div>
@@ -650,7 +650,7 @@
             },
             dataType:"json",
             success:function (data) {
-                console.log(data)
+                console.log(data);
                 if (data.facePic==""){
                     $("#facPic").attr("src", "image/用户头像未登录80-80.png");
                 }else {

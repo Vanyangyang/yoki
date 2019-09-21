@@ -29,8 +29,8 @@ public class LoginController {
         return loginService.login(telephone);
     }
     @RequestMapping("/logon")
-    public int logon(Long telephone,String userName,String password){
-        return loginService.logon(telephone,userName,password);
+    public int logon(UserInfo record){
+        return loginService.logon(record);
     }
     @RequestMapping("/upPwd")
     public int upPwd(Long telephone, String password){
